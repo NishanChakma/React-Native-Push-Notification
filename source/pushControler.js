@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
+import { Platform, StyleSheet, Text, View } from 'react-native';
+import CountDown from 'react-native-countdown-component';
 import { PushNotificationIOS } from 'react-native';
 import PushNotification from 'react-native-push-notification';
-
+import styles from './style';
+const instructions = Platform.select({
+    ios: 'Hello ios user. You will get push notification after a few moments',
+    android: 'Hello android user; \nYou will get push notification after a few moments'
+});
 export default class pushControler extends Component {
     componentDidMount() {
         PushNotification.configure({
@@ -48,7 +54,16 @@ export default class pushControler extends Component {
     }
     render() {
         return (
-            null
+            <View style={styles.container}>
+                <Text style={styles.welcome}>Welcome to React Native!</Text>
+                <Text style={styles.instructions}>{instructions}</Text>
+                <CountDown
+                    until={10}
+                    // onFinish={() => alert('finished')}
+                    // onPress={() => alert('hello')}
+                    size={20}
+                />
+            </View>
         );
     }
 }
